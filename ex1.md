@@ -10,6 +10,7 @@ wget https://downloads.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
 tar zxvf hadoop-3.3.6.tar.gz
 
 sudo mv hadoop-3.3.6 /usr/local/hadoop
+ls /usr/local/
 sudo chown -R $USER:$USER /usr/local/Hadoop
 
 
@@ -74,4 +75,5 @@ mkdir -p /usr/local/hadoop/data/datanode
 hdfs namenode -format
 start-dfs.sh
 start-yarn.sh
+
 jps
