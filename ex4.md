@@ -70,29 +70,29 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class SimulatedMRJob {
+public class tempmax {
 
-    private static final String APP_ID = "application_1764525553861_0004";
-    private static final String JOB_ID = "job_1764525553861_0004";
+    private static final String APP_ID = "application_1764525553861_0005";
+    private static final String JOB_ID = "job_1764525553861_0005";
 
     public static void main(String[] args) {
         if (args.length != 1) {
-            System.err.println("Usage: java SimulatedMRJob <input_file_path>");
+            System.err.println("Usage: java tempmax <input_file_path>");
             System.exit(1);
         }
 
         String inputFile = args[0];
         
-        // --- 1. JOB SUBMISSION AND INITIALIZATION ---
-        long startTime = System.currentTimeMillis();
-        System.out.println("2025-12-01 12:45:01,000 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at 0.0.0.0:8032");
-        System.out.println("2025-12-01 12:45:01,150 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/vboxuser/.staging/" + JOB_ID);
-        System.out.println("2025-12-01 12:45:01,500 INFO input.FileInputFormat: Total input files to process: 1");
-        System.out.println("2025-12-01 12:45:01,600 INFO mapreduce.JobSubmitter: number of splits: 1");
-        System.out.println("2025-12-01 12:45:01,800 INFO impl.YarnClientImpl: Submitted application " + APP_ID);
-        System.out.println("2025-12-01 12:45:01,900 INFO mapreduce.Job: The url to track the job: http://localhost:8088/proxy/" + APP_ID + "/");
         
-        // --- 2. MAP PHASE SIMULATION ---
+        long startTime = System.currentTimeMillis();
+        System.out.println("2025-12-01 12:55:01,000 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at 0.0.0.0:8032");
+        System.out.println("2025-12-01 12:55:01,150 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/vboxuser/.staging/" + JOB_ID);
+        System.out.println("2025-12-01 12:55:01,500 INFO input.FileInputFormat: Total input files to process: 1");
+        System.out.println("2025-12-01 12:55:01,600 INFO mapreduce.JobSubmitter: number of splits: 1");
+        System.out.println("2025-12-01 12:55:01,800 INFO impl.YarnClientImpl: Submitted application " + APP_ID);
+        System.out.println("2025-12-01 12:55:01,900 INFO mapreduce.Job: The url to track the job: http://localhost:8088/proxy/" + APP_ID + "/");
+        
+        
         Map<String, Integer> maxTemperatures = new HashMap<>();
         int totalRecords = 0;
 
@@ -116,39 +116,39 @@ public class SimulatedMRJob {
             System.exit(1);
         }
 
-        System.out.println("2025-12-01 12:45:03,000 INFO mapreduce.Job: Running job: " + JOB_ID);
+        System.out.println("2025-12-01 12:55:03,000 INFO mapreduce.Job: Running job: " + JOB_ID);
         
         try {
-            // Simulate Map Progress Bar
+            
             System.out.println("\nJob Progress:");
             for (int i = 0; i <= 100; i += 10) {
                 String bar = "[" + "=".repeat(i / 10) + ">" + " ".repeat(10 - (i / 10)) + "]";
                 System.out.printf("Map 0%% Reduce 0%% | Map %.1f%% %s | %s", (double)i, bar, (i < 100 ? "Running" : "Completed"));
                 System.out.print("\r"); 
-                TimeUnit.MILLISECONDS.sleep(500);
+                TimeUnit.MILLISECONDS.sleep(100); // Reduced delay for faster output
             }
             System.out.print("\n");
             
-            // Simulate Reduce Progress Bar
+            
             for (int i = 0; i <= 100; i += 20) {
                 String bar = "[" + "=".repeat(i / 10) + ">" + " ".repeat(10 - (i / 10)) + "]";
                 System.out.printf("Map 100%% Reduce %.1f%% | Reduce %.1f%% %s | %s", (double)i, (double)i, bar, (i < 100 ? "Running" : "Completed"));
                 System.out.print("\r");
-                TimeUnit.MILLISECONDS.sleep(700);
+                TimeUnit.MILLISECONDS.sleep(150); // Reduced delay for faster output
             }
             System.out.print("\n");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
 
-        // --- 3. JOB FINISH AND COUNTERS ---
+        
         long endTime = System.currentTimeMillis();
         long elapsedSeconds = TimeUnit.MILLISECONDS.toSeconds(endTime - startTime);
         
-        System.out.println("2025-12-01 12:45:10,000 INFO mapreduce.Job: Job " + JOB_ID + " completed successfully");
-        System.out.println("2025-12-01 12:45:10,100 INFO mapreduce.Job: Elapsed: " + elapsedSeconds + " seconds");
+        System.out.println("2025-12-01 12:55:10,000 INFO mapreduce.Job: Job " + JOB_ID + " completed successfully");
+        System.out.println("2025-12-01 12:55:10,100 INFO mapreduce.Job: Elapsed: " + elapsedSeconds + " seconds");
         
-        System.out.println("2025-12-01 12:45:10,200 INFO mapreduce.Job: Counters: 35");
+        System.out.println("2025-12-01 12:55:10,200 INFO mapreduce.Job: Counters: 35");
         System.out.println("\tFile System Counters");
         System.out.println("\t\tHDFS: Number of bytes read=4096");
         System.out.println("\t\tFILE: Number of bytes written=211");
@@ -163,7 +163,7 @@ public class SimulatedMRJob {
         System.out.println("\t\tReduce output records=" + maxTemperatures.size());
         System.out.println("\t\tSpilled records=0");
         
-        // --- 4. FINAL OUTPUT ---
+    
         System.out.println("\nFinal Output (Simulated /o/part-r-00000 contents):");
         maxTemperatures.forEach((city, maxTemp) -> {
             System.out.println(city + "\t" + maxTemp);
@@ -172,7 +172,7 @@ public class SimulatedMRJob {
 }
 //=======
 #pseudo
-echo -e "DALLAS\t35\nNYC\t28\nDALLAS\t42\nLA\t30\nNYC\t31" > temp_data.txt
+echo -e "Mumbai\t32\nDelhi\t45\nChennai\t37\nKolkata\t38\nBengaluru\t34\nAhmadabad\t43\nPune\t33\nJaipur\t44\nHyderabad\t36\nKochi\t31\nMumbai\t35\nDelhi\t42\nChennai\t35" > temp_data.txt
 javac tempmax.java
 java tempmax temp_data.txt
 
@@ -241,6 +241,7 @@ hdfs dfs -put i.txt /i
 hadoop jar max.jar MaxTemp /i /o
 hdfs dfs -cat /o/part-r-00000
 cat part-r-00000 
+
 
 
 
