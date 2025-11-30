@@ -61,7 +61,9 @@ public class MaxTemp {
 }
 //—-------------------
 
-
+start-dfs.sh
+start-yarn.sh
+jps
 echo -e "DALLAS\t35\nNYC\t28\nDALLAS\t42\nLA\t30\nNYC\t31" > i.txt
 hdfs dfs -rm -r -skipTrash /i /o
 hdfs dfs -mkdir /i
@@ -71,3 +73,4 @@ jar -cvf max.jar *.class
 hadoop jar max.jar MaxTemp /i /o
 hdfs dfs -cat /o/part-r-00000
 cat part-r-00000 
+
