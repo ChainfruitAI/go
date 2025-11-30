@@ -11,7 +11,7 @@ tar zxvf hadoop-3.3.6.tar.gz
 
 sudo mv hadoop-3.3.6 /usr/local/hadoop
 ls /usr/local/
-sudo chown -R $USER:$USER /usr/local/Hadoop
+sudo chown -R $USER:$USER /usr/local/hadoop
 
 
 nano ~/.bashrc
@@ -26,12 +26,14 @@ export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 
 source ~/.bashrc
 
-cd /usr/local/hadoop/etc/Hadoop
+cd /usr/local/hadoop/etc/hadoop
 
 #link java
 nano hadoop-env.sh
 export JAVA_HOME=/usr/lib/jvm/default-java
 
+
+# Inside CONFIG <> section
 nano core-site.xml
 <property>
     <name>fs.defaultFS</name>
@@ -52,7 +54,10 @@ nano hdfs-site.xml
     <value>file:///usr/local/hadoop/data/datanode</value>
 </property>
 
-cp mapred-site.xml.template mapred-site.xml
+ls -l | grep mapred
+sudo nano mapred-site.xml
+
+#cp mapred-site.xml.template mapred-site.xml
 nano mapred-site.xml
 <property>
     <name>mapreduce.framework.name</name>
@@ -72,8 +77,11 @@ nano yarn-site.xml
 mkdir -p /usr/local/hadoop/data/namenode
 mkdir -p /usr/local/hadoop/data/datanode
 
-hdfs namenode -format
+#hdfs namenode -format
+bin/hdfs namenode -format
+#sbin/start-dfs.sh
 start-dfs.sh
 start-yarn.sh
 
 jps
+
